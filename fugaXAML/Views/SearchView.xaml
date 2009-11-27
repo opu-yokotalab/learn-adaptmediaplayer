@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="AdaptMediaPlayer.Views.SearchView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="UserControl_Loaded">
+    <Grid>
+        <Rectangle Fill="Black" Opacity="0.3"/>
+
+        <Canvas x:Name="searchWindow" Width="640" Height="480" Background="White" Margin="50">
+            <TextBlock x:Name="debugText"/>
+            
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Canvas x:Name="tagLinks" Grid.Column="0" Grid.Row="0"/>
+                <Canvas x:Name="result" Grid.Column="1" Grid.Row="0"/>
+            </Grid>
+        </Canvas>
+    </Grid>
+</UserControl>

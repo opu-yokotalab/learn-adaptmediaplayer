@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaptMediaPlayer", "fugaXAML\AdaptMediaPlayer.csproj", "{2E7174B6-51D5-4A1E-954F-5D34E90661CB}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "fugaXAML.Web", "fugaXAML.Web\", "{579DCCDD-5B9B-4C17-ACA1-EDA57FCB90B2}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/AdeptMediaPlayer.Web"
+		Debug.AspNetCompiler.PhysicalPath = "fugaXAML.Web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\AdeptMediaPlayer.Web\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/AdeptMediaPlayer.Web"
+		Release.AspNetCompiler.PhysicalPath = "fugaXAML.Web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\AdeptMediaPlayer.Web\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4435"
+		VWDDynamicPort = "false"
+		DefaultWebSiteLanguage = "Visual C#"
+		ProjOutputReferences = "{2E7174B6-51D5-4A1E-954F-5D34E90661CB}|ClientBin|false;"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E7174B6-51D5-4A1E-954F-5D34E90661CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7174B6-51D5-4A1E-954F-5D34E90661CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7174B6-51D5-4A1E-954F-5D34E90661CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7174B6-51D5-4A1E-954F-5D34E90661CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579DCCDD-5B9B-4C17-ACA1-EDA57FCB90B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579DCCDD-5B9B-4C17-ACA1-EDA57FCB90B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579DCCDD-5B9B-4C17-ACA1-EDA57FCB90B2}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{579DCCDD-5B9B-4C17-ACA1-EDA57FCB90B2}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
