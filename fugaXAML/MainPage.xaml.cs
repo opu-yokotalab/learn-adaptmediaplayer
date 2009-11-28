@@ -27,44 +27,34 @@ namespace AdaptMediaPlayer
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            // 変数，クラスの初期化
-            //MediaData.sb.Duration = TimeSpan.FromMinutes(30);  // 時間は適当
-
             // タイマー
             var timer = new System.Windows.Threading.DispatcherTimer();
             timer.Interval = new TimeSpan(200);
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
 
-            #region スロー再生用タイマー
-            /*
-            var timerSlow = new System.Windows.Threading.DispatcherTimer();
-            timerSlow.Interval = TimeSpan.FromMilliseconds(100);
-            timerSlow.Tick += new EventHandler(timerSlow_Tick);
-            timerSlow.Start();
-             */
-            #endregion
-
-            // 適当にデフォルトの状態を指定
-            //var jsonList = new List<string>{
-            //    "otehon.json",
-            //    "student.json"
-            //};
-
+            // 最初に読込む動画群を指定
             var jsonList = new List<string>();
             var wc = new WebClient();
             wc.DownloadStringCompleted += (_s, _e) =>
             {
-                jsonList = _e.Result.Trim().Split('\n').ToList<string>();
-                
-                // 適当に指定したファイル読み込み
-                foreach (var filename in jsonList)
+                if (_e.Error == null)
                 {
-                    OpenData(filename, jsonList.IndexOf(filename));
+                    jsonList = _e.Result.Trim().Split('\n').ToList<string>();
+
+                    // 適当に指定したファイル読み込み
+                    foreach (var filename in jsonList)
+                    {
+                        OpenData(filename, jsonList.IndexOf(filename));
+                    }
+                }
+                else
+                {
+                    // エラー処理
+                    debugTextBox.Text = _e.Error.ToString();
                 }
             };
             wc.DownloadStringAsync(new Uri(MediaData.baseUri, "input.txt"));
-
         }
 
         public void OpenData(string filename, int number)
@@ -316,74 +306,6 @@ namespace AdaptMediaPlayer
                 }
             };
             wc.OpenReadAsync(new Uri(MediaData.baseUri, filename));
-
-            #region スロー再生（現在不使用）
-            //for (var j = 0; j < MediaData.media[0].sync.Count; j++)
-            //{
-            //    double ratio;
-
-            //    if (j == 0)
-            //    {
-            //        ratio = MediaData.media[0].sync[j].TotalMilliseconds
-            //                    / MediaData.media[1].sync[j].TotalMilliseconds;
-            //    }
-            //    else
-            //    {
-            //      ratio = (MediaData.media[0].sync[j].TotalMilliseconds - MediaData.media[0].sync[j - 1].TotalMilliseconds)
-            //                    / (MediaData.media[1].sync[j].TotalMilliseconds - MediaData.media[1].sync[j - 1].TotalMilliseconds);
-            //    }
-
-            //    MediaData.movieList[0].currentPlayer.slowPlayRatio.Add(ratio);
-            //    //Debug.WriteLine(ratio);
-            //    /*
-            //    double ratio;
-            //    int big, small;
-
-            //    if (j == 0)
-            //    {
-            //        if (MediaData.media[0].sync[j] < MediaData.media[1].sync[j])
-            //        {
-            //            big = 1;
-            //            small = 0;
-            //        }
-            //        else
-            //        {
-            //            big = 0;
-            //            small = 1;
-            //        }
-
-            //        ratio = MediaData.media[small].sync[j].TotalMilliseconds
-            //                    / MediaData.media[big].sync[j].TotalMilliseconds;
-            //    }
-            //    else
-            //    {
-            //        if (MediaData.media[0].sync[j] - MediaData.media[0].sync[j - 1]
-            //            < (MediaData.media[1].sync[j] - MediaData.media[1].sync[j - 1]))
-            //        {
-            //            big = 1;
-            //            small = 0;
-            //        }
-            //        else
-            //        {
-            //            big = 0;
-            //            small = 1;
-            //        }
-            //        ratio = (MediaData.media[small].sync[j].TotalMilliseconds - MediaData.media[small].sync[j - 1].TotalMilliseconds)
-            //                    / (MediaData.media[big].sync[j].TotalMilliseconds - MediaData.media[big].sync[j - 1].TotalMilliseconds);
-            //    }
-
-            //    MediaData.movieList[small].currentPlayer.slowPlayRatio.Add(ratio);
-            //    MediaData.movieList[big].currentPlayer.slowPlayRatio.Add(1.0);
-            //     */
-            //}
-            /*
-            for (var j = 0; j < MediaData.movieList[0].currentPlayer.slowPlayRatio.Count; j++)
-            {
-                Debug.WriteLine(MediaData.movieList[0].currentPlayer.slowPlayRatio[j]);
-                Debug.WriteLine(MediaData.movieList[1].currentPlayer.slowPlayRatio[j]);
-            }
-             */
-            #endregion
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -403,27 +325,6 @@ namespace AdaptMediaPlayer
                                             / value.currentPlayer.movie.NaturalDuration.TimeSpan.TotalSeconds * 320;
             }
         }
-
-        #region スロー再生用
-        //void timerSlow_Tick(object sender, EventArgs e)
-        //{
-        //        if (MediaData.IsSlowPlay)
-        //        {
-        //            MediaData.movieList[0].currentPlayer.movie.Position
-        //                += TimeSpan.FromMilliseconds(100 * MediaData.movieList[0].currentPlayer.currentPlayRatio);
-        //            /*
-        //            foreach (var value in MediaData.movieList)
-        //            {
-        //                if (value.currentPlayer.currentPlayRatio != 1.0)
-        //                {
-        //                    value.currentPlayer.movie.Position
-        //                        += TimeSpan.FromMilliseconds(100 * value.currentPlayer.currentPlayRatio);
-        //                }
-        //            }
-        //             */
-        //        }
-        //}
-        #endregion
 
         // 停止
         private void StopMediaAll(object sender, MouseButtonEventArgs e)
@@ -471,28 +372,6 @@ namespace AdaptMediaPlayer
             }
         }
 
-        #region スロー再生（現在不使用）
-        // スロー再生　→　ロードが追いつかない，負荷が高すぎる　→　使い物にならない
-        // WPFの再生速度変更プロパティがSilverlightにもあれば…
-        //private void SlowMediaAll(object sender, MouseButtonEventArgs e)
-        //{
-        //    //foreach (var value in MediaData.movieList)
-        //    //{
-        //    //    value.currentPlayer.movie.Pause();
-        //    //    value.currentPlayer.currentPlayRatio = value.currentPlayer.slowPlayRatio[0];
-        //    //    if (value.currentPlayer.currentPlayRatio == 1.0)
-        //    //    {
-        //    //        value.currentPlayer.movie.Play();
-        //    //    }
-        //    //    //Debug.WriteLine(value.currentPlayer.currentPlayRatio);
-        //    //}
-        //    MediaData.movieList[0].currentPlayer.movie.Pause();
-        //    MediaData.movieList[0].currentPlayer.currentPlayRatio = MediaData.movieList[0].currentPlayer.slowPlayRatio[0];
-        //    MediaData.movieList[1].currentPlayer.movie.Play();
-        //    MediaData.IsSlowPlay = true;
-        //}
-        #endregion
-
         // 長方形のプロパティを表示（デバッグ用）
         private void OutputDebugRect(object sender, MouseButtonEventArgs e)
         {
@@ -537,36 +416,6 @@ namespace AdaptMediaPlayer
             }
         }
 
-        /*
-
-        private void ClearDebugRect(object sender, RoutedEventArgs e)
-        {
-            drawArea.canvas.Children.Remove((UIElement)drawArea.FindName("hoge"));
-            drawArea.drawingRectangle = null;
-        }
-
-        private void ClearDebugText(object sender, RoutedEventArgs e)
-        {
-            debugTextBox.Text = "";
-        }
-
-        // 変更時のタイトル変更がまだ　→　できるようになった
-        // 変更時にmovieのindexも合わせて変更
-        private void changeMovie1(object sender, RoutedEventArgs e)
-        {
-            movie1.Source = new Uri(baseUri, inputMovie1Name.SelectedItem.ToString());
-            movie1_index = inputMovie1Name.SelectedIndex;
-            movie1name.Text = MediaData.media[movie1_index].tag;
-        }
-
-        private void changeMovie2(object sender, RoutedEventArgs e)
-        {
-            movie2.Source = new Uri(baseUri, inputMovie2Name.SelectedItem.ToString());
-            movie2_index = inputMovie2Name.SelectedIndex;
-            movie2name.Text = MediaData.media[movie2_index].tag;
-        }
-         */
-        
         // カメラ位置変更
         private void ChangeCamera(object sender, RoutedEventArgs e)
         {

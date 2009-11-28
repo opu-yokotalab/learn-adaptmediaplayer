@@ -61,10 +61,8 @@ namespace AdaptMediaPlayer
             public Controls.MediaPlayer currentPlayer;
             public int playerPosition;
         }
+
         // movieList : 今再生（・制御）している動画群のリスト
         public static List<MovieSet> movieList = new List<MovieSet>();
-
-        // スロー再生の状態
-        //public static bool IsSlowPlay = false;
     }
 }

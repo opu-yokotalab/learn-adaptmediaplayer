@@ -48,8 +48,6 @@
                 Grid.Column="3" Grid.Row="0"
                 MouseLeftButtonDown="FaMediaAll"
                 ToolTipService.ToolTip="コマ送り" ToolTipService.Placement="Top"/>
-            <!--<Image Source="image/Slow.png" Grid.Column="3" Grid.Row="0" Height="32" Width="32"
-                MouseLeftButtonDown="SlowMediaAll"/>-->
             <Image Source="image/Clear.png" Style="{StaticResource ampImageButton}"
                 Grid.Column="4" Grid.Row="0"
                 MouseLeftButtonDown="ClearCanvas"
@@ -67,45 +65,12 @@
                 MouseLeftButtonDown="searchView_Click"
                 ToolTipService.ToolTip="動画群の検索" ToolTipService.Placement="Top"/>-->
             <TextBox x:Name="debugTextBox" Grid.Column="8" Grid.Row="0" IsReadOnly="True"/>
-            <!--
-            <Button Click="ClearDebugRect" Grid.Column="4" Grid.Row="0" Content="ClearRect" />
-            <Button Click="ClearDebugText" Grid.Column="5" Grid.Row="0" Content="ClearText" />-->
         </Grid>
-        
+
         <Canvas x:Name="ChangeCameraArea" Margin="700,100,0,0"/>
 
         <Canvas x:Name="ExCamaraArea" Margin="700,340,0,0">
             <Button Click="ExCamera" Content="なし" FontSize="18" Width="80"/>
         </Canvas>
-        
-        <!--<Grid Margin="0,380,0,0" Canvas.Left="8" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            
-            <ListBox x:Name="inputMovie1Name" Grid.Column="0" Grid.Row="0" 
-                ItemsSource="{Binding}" />
-            <Button Click="changeMovie1" Grid.Column="1" Grid.Row="0" Content="Change1" />
-        </Grid>
-        <Grid Margin="340,380,0,0" Canvas.Left="8" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <ListBox x:Name="inputMovie2Name" Grid.Column="0" Grid.Row="0" 
-                ItemsSource="{Binding}" />
-            <Button Click="changeMovie2" Grid.Column="1" Grid.Row="0" Content="Change2" />
-        </Grid>
-        <TextBox x:Name="debugTextBox" Margin="0,550,0,0"
-            IsReadOnly="True" Visibility="Collapsed"/>-->
-        <!--<view:SearchView x:Name="searchView" Visibility="Collapsed"/>-->
     </Canvas>
 </UserControl>

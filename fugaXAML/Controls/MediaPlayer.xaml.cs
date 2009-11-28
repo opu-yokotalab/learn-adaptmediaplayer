@@ -21,10 +21,6 @@ namespace AdaptMediaPlayer.Controls
         public MediaData.Media media;
         public Storyboard sb;
         
-        //public double currentPlayRatio;
-        //public int reachMarker = 1;
-        //public List<double> slowPlayRatio = new List<double>();
-        
         public MediaPlayer()
         {
             InitializeComponent();
@@ -139,19 +135,6 @@ namespace AdaptMediaPlayer.Controls
                     }
                 }
             }
-            //}
-            //else
-            //{
-            //    //movie.Pause();
-            //    MediaData.movieList[0].currentPlayer.currentPlayRatio
-            //        = MediaData.movieList[0].currentPlayer.slowPlayRatio[reachMarker];
-            //    reachMarker++;
-            //    //if (currentPlayRatio == 1.0)
-            //    //{
-            //    //    movie.Play();
-            //    //}
-            //    //Debug.WriteLine(currentPlayRatio);
-            //}
         }
 
         public void StopMedia(object sender, RoutedEventArgs e)
